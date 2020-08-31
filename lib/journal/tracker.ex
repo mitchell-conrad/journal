@@ -32,13 +32,17 @@ defmodule Journal.Tracker do
   def handle_call({:hello, other}, _from, nodes) do
     :erlang.monitor_node(other, true)
     nodes = MapSet.put(nodes, other)
-    GenEvent.notify(Journal.Broadcast, {:nodes, MapSet.put(nodes, node())})
+    # GenEvent.notify(Journal.Broadcast, {:nodes, MapSet.put(nodes, node())})
     {:reply, :ok, nodes}
+  end
+
+  def handle_call(:current, _from, nodes) do
+    {:reply, {:ok, MapSet.put(nodes, node())}, nodes}
   end
 
   def handle_info({:nodedown, other}, nodes) do
     nodes = MapSet.delete(nodes, other)
-    GenEvent.notify(Journal.Broadcast, {:nodes, MapSet.put(nodes, node())})
+    # GenEvent.notify(Journal.Broadcast, {:nodes, MapSet.put(nodes, node())})
     {:noreply, nodes}
   end
 
@@ -49,7 +53,7 @@ defmodule Journal.Tracker do
       :ok = :rpc.call(other, __MODULE__, :hello, [node])
       :erlang.monitor_node(other, true)
       nodes = MapSet.put(nodes, other)
-      GenEvent.notify(Journal.Broadcast, {:nodes, MapSet.put(nodes, node())})
+      # GenEvent.notify(Journal.Broadcast, {:nodes, MapSet.put(nodes, node())})
     end
     {:noreply, nodes}
   end
