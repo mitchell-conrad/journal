@@ -9,8 +9,8 @@ defmodule Journal.Application do
     children = [
       # Starts a worker by calling: Journal.Worker.start_link(arg)
       # {Journal.Worker, arg}
-      {Journal.Broadcast, arg},
-      {Journal.Tracker, }
+      {Journal.Broadcast, [[name: Journal.Broadcast]]},
+      {Journal.Tracker, [[name: Journal.Tracker]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
