@@ -3,7 +3,6 @@ defmodule Journal.Writer do
 
   def get_date do
     DateTime.utc_now
-    |> DateTime.shift_zone!(Application.get_env(:journal, :timezone))
     |> Date.to_string
   end
 
@@ -23,7 +22,6 @@ defmodule Journal.Writer do
 
   def get_time do
     DateTime.utc_now
-    |> DateTime.shift_zone!(Application.get_env(:journal, :timezone))
     |> DateTime.to_time
     |> Time.truncate(:second)
     |> Time.to_string
