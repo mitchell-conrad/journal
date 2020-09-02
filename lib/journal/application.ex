@@ -9,8 +9,8 @@ defmodule Journal.Application do
     children = [
       # Starts a worker by calling: Journal.Worker.start_link(arg)
       # {Journal.Worker, arg}
-      %{id: Journal.Tracker, 
-        start: {Journal.Tracker, :start_link, [[]]}
+      %{id: Journal.Receiver, 
+        start: {Journal.Receiver, :start_link, [[]]}
        }
     ]
 

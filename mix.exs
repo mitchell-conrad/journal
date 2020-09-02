@@ -14,6 +14,7 @@ defmodule Journal.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      applications: [:peerage],
       extra_applications: [:logger],
       mod: {Journal.Application, []}
     ]
@@ -25,6 +26,7 @@ defmodule Journal.MixProject do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
         {:tzdata, "~> 1.0.1"},
+        {:peerage, "~> 1.0.2"},
     ]
   end
 end
