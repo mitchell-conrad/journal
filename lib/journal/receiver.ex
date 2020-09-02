@@ -9,12 +9,12 @@ defmodule Journal.Receiver do
     {:ok, init_arg}
   end
 
-  def handle_call({:push, entry}, _from, state) do
+  def handle_cast({:push, entry}, state) do
     Journal.Writer.write_today(entry)
-    {:reply, [], []}
+    {:noreply, []}
   end
 
   def push(pid, entry) do
-    GenServer.call(pid, {:push, entry})
+    GenServer.cast(pid, {:push, entry})
   end
 end
